@@ -5,7 +5,7 @@ const schema = mongoose.Schema({
     spec: String,
     slots: [{
         condition: {type:Boolean,default: false,require: false},
-        time: String,
+        time: String,   
         user: {type:String,default: "",require: false},
     }],
 })
