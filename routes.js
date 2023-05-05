@@ -1,7 +1,19 @@
 const express = require("express")
+const router = express.Router()
 const Doctors = require("./models/Doctors.js")
 const Users = require("./models/Users.js")
-const router = express.Router()
+const notifCheck = require("./middleware/notifications.js")
+
+router.get("/notifications/:userId",async (req,res) => {
+	const user = await Users.findOne({_id:req.params.userId})
+	const doctors = await Doctors.find()
+	const currentDate = new Date("2022-01-01T8:30:00");
+	for(let i=0;i<doctors.length;i++){
+    	for(let j =0;i<doctors.slots.length;j++){
+			notifCheck();
+		}
+	}
+})
 
 router.get("/users", async (req, res) => {
 	const users = await Users.find()
