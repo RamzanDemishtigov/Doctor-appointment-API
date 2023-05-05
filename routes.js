@@ -6,13 +6,15 @@ const notifCheck = require("./middleware/notifications.js")
 
 router.get("/notifications/:userId",async (req,res) => {
 	const user = await Users.findOne({_id:req.params.userId})
-	const doctors = await Doctors.find()
-	const currentDate = new Date("2022-01-01T8:30:00");
-	for(let i=0;i<doctors.length;i++){
-    	for(let j =0;i<doctors.slots.length;j++){
-			notifCheck();
-		}
-	}
+	let doctors = await Doctors.find()
+	notifCheck(user,doctors)
+	res.send()
+})
+//router.use("/users/:id",notifCheck())
+
+router.get("/users/:id", async (req, res) => {
+	const user = await Users.findOne({ _id: req.params.id })
+	res.send(user)
 })
 
 router.get("/users", async (req, res) => {
